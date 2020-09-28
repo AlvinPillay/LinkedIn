@@ -180,6 +180,14 @@ FROM	Adoptions AS A1
 					OR
 					(A1.Name > A2.Name AND A1.Species <> A2.Species)
 				)
+-- (Alvin Pillay 28/9/2020) The above can be reduced to
+-- 			AND	(	(A1.Name = A2.Name AND A1.Species > A2.Species)
+--					OR
+--					(A1.Name > A2.Name )
+--				)
+-- This makes logical sense, since we use (A1.Name > A2.Name ) to get rid of the "reapeating groups" and then we cater for the case 
+-- when an animal from two species can have the same name with (A1.Name = A2.Name AND A1.Species > A2.Species)
+				
 ORDER BY	A1.Adopter_Email,
 			A1.Adoption_Date;
 
